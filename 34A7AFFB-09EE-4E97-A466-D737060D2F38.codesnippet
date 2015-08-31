@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDECodeSnippetCompletionPrefix</key>
+	<string>run debug</string>
+	<key>IDECodeSnippetCompletionScopes</key>
+	<array>
+		<string>CodeBlock</string>
+	</array>
+	<key>IDECodeSnippetContents</key>
+	<string>#if DEBUG
+    dispatch_queue_t queue = dispatch_get_main_queue();
+    static dispatch_source_t source = nil;
+    __typeof(self) __weak weakSelf = self;
+    static dispatch_once_t onceToken;
+    dispatch_once(&amp;onceToken, ^{
+        source = dispatch_source_create(DISPATCH_SOURCE_TYPE_SIGNAL, SIGSTOP, 0, queue);
+        if (source)
+        {
+            dispatch_source_set_event_handler(source, ^{
+                /*! FOR ADVANCED DEBUG. */
+                /*! ADD A BREAKPOINT HERE. */
+                NSLog(@"%@ -&gt; %s", weakSelf, __FUNCTION__);
+                
+            });
+            dispatch_resume(source);
+        }
+    });
+#endif</string>
+	<key>IDECodeSnippetIdentifier</key>
+	<string>34A7AFFB-09EE-4E97-A466-D737060D2F38</string>
+	<key>IDECodeSnippetLanguage</key>
+	<string>Xcode.SourceCodeLanguage.Objective-C</string>
+	<key>IDECodeSnippetSummary</key>
+	<string>GCD debug mode. </string>
+	<key>IDECodeSnippetTitle</key>
+	<string>Run Debug</string>
+	<key>IDECodeSnippetUserSnippet</key>
+	<true/>
+	<key>IDECodeSnippetVersion</key>
+	<integer>2</integer>
+</dict>
+</plist>
